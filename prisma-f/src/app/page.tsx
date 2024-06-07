@@ -27,6 +27,14 @@ export default function Home() {
                 로그인으로 이동 -&gt;
               </button>
             </div>
+            <div className="bg-[var(--color-Harbor-firth)] w-[20vw] hover:bg-gradient-to-r from-[var(--color-Harbor-first)] to-[var(--color-Harbor-firth)] transition duration-500 ease-in-out px-[2vw]">
+              <button
+                onClick={() => router.push(`/pages/news`)}
+                className="text-[var(--color-Harbor-second)] hover:text-[var(--color-Harbor-firth)] transition duration-500 ease-in-out"
+              >
+                뉴스페이지으로 이동 -&gt;
+              </button>
+            </div>
           </div>
         </div>
       </div>
