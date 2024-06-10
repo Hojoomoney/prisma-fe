@@ -1,0 +1,34 @@
+services:
+  database:
+    container_name: db-container
+    image: mongo
+    volumes:
+      - C:/Users/bitcamp/docker/mongo/db/etc/mongo/conf.d:/etc/mongo/conf.d:ro
+      - C:/Users/bitcamp/docker/mongo/db/var/lib/mongo:/var/lib/mongo
+      - C:/Users/bitcamp/docker/mongo/db/var/log/mongo:/var/log/mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=rootdb
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - rootnet
+
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://root:root@db-container:27017/rootdb
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    networks:
+      - rootnet
+
+networks:
+  rootnet:
+    driver: bridge
